@@ -8,8 +8,9 @@ const debug = require('debug')('logisitcs:server');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
-const shipmentRouter = require('../src/routes/shipment');
 const cors = require('cors');
+const shipmentRouter = require('../src/routes/shipment');
+
 
 const app = express();
 

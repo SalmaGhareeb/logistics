@@ -1,5 +1,7 @@
 const shipmentService = require('../service/shipmentService');
+
 const connection = require("../config/connection.js");
+
 const db = connection();
 
 /**
@@ -8,11 +10,12 @@ const db = connection();
  */
 var seeder = (req, res) => {
     let query = "SELECT count(*) as shipments FROM shipments";
+
     db.query(query, (err, result) => {
         if (err) {
             res.status(500);
             res.json({
-                'error': 'Something wrong happend'
+                'error': 'Something wrong happend!!!'
             });
             return;
         }
@@ -27,15 +30,16 @@ var seeder = (req, res) => {
                 }, () => {
                     res.status(500);
                     res.json({
-                        'error': 'Something wrong happend'
+                        'error': 'Something wrong happend!!'
                     });
 
                     return;
                 });
             }, (err) => {
+                console.log(err);
                 res.status(500);
                 res.json({
-                    'error': 'Something wrong happend'
+                    'error': 'Something wrong happend!'
                 });
                 return;
             });
@@ -55,10 +59,11 @@ var seeder = (req, res) => {
  */
 var insert = (data) => {
     let values = [];
-    const query = 'INSERT INTO shipments (delivery_date, started_at, finished_at, description, shipment_status, driver_comment, pickup_location, delivery_location) VALUES ?'
+    const query = 'INSERT INTO shipments (courier,delivery_date, started_at, finished_at, description, shipment_status, driver_comment, pickup_location, delivery_location, driver_name) VALUES ?'
 
     for (var i = 0; i < data.length; i++) {
         values.push([
+            data[i].courier,
             new Date(data[i].deliveryDate),
             new Date(data[i].startedAt),
             new Date(data[i].finishedAt),
@@ -67,6 +72,7 @@ var insert = (data) => {
             data[i].driverComment,
             data[i].fromLocation,
             data[i].toLocation,
+            data[i].driverName
         ]);
     }
 
@@ -92,7 +98,7 @@ var getShipments = (req, res) => {
         if (err) {
             res.status(500);
             res.json({
-                'error': 'Something wrong happend'
+                'error': 'Something wrong happend while getting shipments'
             });
             return;
         }
@@ -116,7 +122,7 @@ var updateShipmentStatus = (req, res) => {
         if (err) {
             res.status(500);
             res.json({
-                'error': 'Something wrong happend'
+                'error': 'Something wrong happend while updating'
             });
         } else if (result.length == 0) {
             res.status(400);
@@ -159,7 +165,6 @@ const updateStatus = (status, id) => {
 
     return new Promise((resolve, reject) => {
         db.query(updateQuery, [status, id], (err, result) => {
-
             if (err) {
                 reject();
             } else {

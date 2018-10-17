@@ -1,5 +1,7 @@
-const shipment = require('../model/shipment');
+
 const express = require('express');
+const shipment = require('../model/shipment');
+
 
 var router = express.Router();
 
