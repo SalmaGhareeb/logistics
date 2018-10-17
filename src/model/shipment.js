@@ -112,6 +112,15 @@ const getShipments = (req, res) => {
  */
 var updateShipmentStatus = (req, res) => {
     let shipmentId = req.params.id;
+    let shipmentStatus = req.body.status;
+
+    if (shipmentStatus == "") {
+        res.status(400);
+        res.json({
+            'error': 'Status not found!'
+        });
+        return;
+    }
 
     let query = "SELECT `shipment_status` FROM shipments where id= ?";
 
@@ -134,7 +143,7 @@ var updateShipmentStatus = (req, res) => {
         }
     });
 
-    updateStatus('done', shipmentId).then(() => {
+    updateStatus(shipmentStatus, shipmentId).then(() => {
         res.status(200);
 
         res.json({

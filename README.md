@@ -1,3 +1,7 @@
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/SalmaAbdelhady/logistics/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/SalmaAbdelhady/logistics/?branch=master)
+
+[![Build Status](https://scrutinizer-ci.com/g/SalmaAbdelhady/logistics/badges/build.png?b=master)](https://scrutinizer-ci.com/g/SalmaAbdelhady/logistics/build-status/master)
+
 ## Before you start
 
 1. Technical requirements
