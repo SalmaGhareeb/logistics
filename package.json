@@ -25,6 +25,7 @@
     "babel-register": "^6.26.0",
     "body-parser": "^1.18.3",
     "cookie-parser": "~1.4.3",
+    "cors": "^2.8.4",
     "debug": "~2.6.9",
     "dotenv": "^6.1.0",
     "express": "^4.16.4",
@@ -53,6 +54,7 @@
     "jest": "^23.6.0",
     "jest-cli": "^23.6.0",
     "lint": "^1.1.2",
-    "nodemon": "^1.18.4"
+    "nodemon": "^1.18.4",
+    "supertest": "^3.3.0"
   }
 }

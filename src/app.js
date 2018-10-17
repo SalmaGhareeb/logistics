@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const shipmentRouter = require('../src/routes/shipment');
-
+const cors = require('cors');
 
 const app = express();
 
@@ -19,10 +19,8 @@ app.set('port', port);
 
 // parse application/json
 app.use(bodyParser.json({
-  limit: '2000kb',
+  limit: '4000kb',
 }));
-
-
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -30,10 +28,8 @@ app.use(express.urlencoded({
   extended: false
 }));
 app.use(cookieParser());
-
+app.use(cors());
 app.use('/', shipmentRouter);
-
-;
 
 // error handler
 app.on('error', (appErr, appCtx) => {
