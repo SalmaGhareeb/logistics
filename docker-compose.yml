@@ -1,10 +1,9 @@
-version:  '2'
+version:  '3'
 services:
   mysql:
-    image: percona:latest
-    build: .docker/MYSQL
+    build: ./.docker/mysql
     volumes:
-      - .docker/MYSQL/init_db.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./.docker/mysql/init_db.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
       MYSQL_ROOT_PASSWORD: $MYSQL_PASSWORD
     ports:
@@ -12,16 +11,34 @@ services:
     networks:
       - wimo
   node:
-      build: .
+      build: ./.docker/node
       entrypoint:
             - /usr/local/bin/docker-entrypoint.sh
       depends_on:
             - mysql
+      volumes:
+            - "./:/app"
       ports:
             - "3000:3000"
       networks:
         - wimo
+  nginx:
+    build:
+      context: ./.docker/nginx
+    links:
+      - node
+    ports:
+      - "8080:80"
+      - "443:443"
+    volumes:
+      - "./client/dist:/usr/share/nginx/html"
+  webpack:
+    build: 
+      context: ./.docker/webpack
+    container_name: webpack
+    volumes:
+      - "./client:/app/client"
+    command: "npm start"
 networks:
     wimo:
       driver: bridge
-  

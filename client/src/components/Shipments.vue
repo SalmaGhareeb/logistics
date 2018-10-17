@@ -28,13 +28,13 @@
 </template>
 
 <script>
-import ShipmentService from "@/service/ShipmentService";
+import ShipmentService from '@/service/ShipmentService';
 
 export default {
-  name: "shipments",
+  name: 'shipments',
   data() {
     return {
-      shipments: []
+      shipments: [],
     };
   },
   mounted() {
@@ -44,8 +44,8 @@ export default {
     async fetchShipments() {
       const response = await ShipmentService.getShipments();
       this.shipments = response.data;
-    }
-  }
+    },
+  },
 };
 </script>
 <style type="text/css">

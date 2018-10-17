@@ -2,16 +2,15 @@ FROM node:latest
 
 # Good to have stuff
 RUN npm install babel-cli -g
+# Set work directory to /www
+WORKDIR /app
 
-# Install app dependencies
-COPY package.json www/package.json
-RUN cd www/ && npm install
+RUN npm install
 
 # Copy app source
-COPY . /www
+COPY . /app
 
-# Set work directory to /www
-WORKDIR /www
+
 # set your port
 ENV PORT 3000
 # Entrypoint script

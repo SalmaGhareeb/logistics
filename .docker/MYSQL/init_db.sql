@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS shipments (
   shipment_status VARCHAR(100),
   driver_comment VARCHAR(255),
   driver_name VARCHAR(255),
-  courier VARCHAR(100),
+  courier VARCHAR(100)
 );
 
 SHOW COLUMNS FROM shipments;
