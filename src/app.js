@@ -14,7 +14,7 @@ const shipmentRouter = require('../src/routes/shipment');
 
 const app = express();
 
-var port = process.env.PORT || '3000';
+let port = process.env.PORT || '3000';
 app.set('port', port);
 
 

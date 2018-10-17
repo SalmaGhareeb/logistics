@@ -1,9 +1,9 @@
 
 const express = require('express');
+
 const shipment = require('../model/shipment');
 
-
-var router = express.Router();
+const router = express.Router();
 
 router.get("/shipments", shipment.getShipments);
 router.get("/shipments/seed", shipment.seeder);

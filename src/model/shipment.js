@@ -8,7 +8,7 @@ const db = connection();
  * 
  * @param {Array} data 
  */
-var seeder = (req, res) => {
+const seeder = (req, res) => {
     let query = "SELECT count(*) as shipments FROM shipments";
 
     db.query(query, (err, result) => {
@@ -36,20 +36,18 @@ var seeder = (req, res) => {
                     return;
                 });
             }, (err) => {
-                console.log(err);
                 res.status(500);
                 res.json({
                     'error': 'Something wrong happend!'
                 });
                 return;
             });
-        } else {
-            res.status(200);
-            res.json({
-                'message': 'Shipments already seeded'
-            });
+            return;
         }
-
+        res.status(200);
+        res.json({
+            'message': 'Shipments already seeded'
+        });
     });
 };
 
@@ -57,7 +55,7 @@ var seeder = (req, res) => {
  * 
  * @param {Array} data 
  */
-var insert = (data) => {
+const insert = (data) => {
     let values = [];
     const query = 'INSERT INTO shipments (courier,delivery_date, started_at, finished_at, description, shipment_status, driver_comment, pickup_location, delivery_location, driver_name) VALUES ?'
 
@@ -80,9 +78,8 @@ var insert = (data) => {
         db.query(query, [values], (err, result) => {
             if (err) {
                 reject(err);
-            } else {
-                resolve(result.affectedRows);
             }
+            resolve(result.affectedRows);
         });
     });
 };
@@ -92,7 +89,7 @@ var insert = (data) => {
  * @param {*} req 
  * @param {*} res 
  */
-var getShipments = (req, res) => {
+const getShipments = (req, res) => {
     let query = "SELECT * FROM shipments";
     db.query(query, (err, rows) => {
         if (err) {
@@ -167,9 +164,8 @@ const updateStatus = (status, id) => {
         db.query(updateQuery, [status, id], (err, result) => {
             if (err) {
                 reject();
-            } else {
-                resolve(result);
             }
+            resolve(result);
         });
     });
 

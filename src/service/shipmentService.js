@@ -1,7 +1,7 @@
 const request = require("request");
 
 
-var fetch = () => {
+const fetch = () => {
     var options = {
         url: encodeURI('https://api.myjson.com/bins/b9ix6​'),
         headers: {
@@ -14,9 +14,8 @@ var fetch = () => {
         request.get(options, function (err, resp, body) {
             if (err) {
                 reject(err);
-            } else {
-                resolve(JSON.parse(body));
             }
+            resolve(JSON.parse(body));
         });
     });
 };
